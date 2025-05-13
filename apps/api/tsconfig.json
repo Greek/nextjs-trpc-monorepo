@@ -1,10 +1,12 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "lib": ["ES2015"],
     "outDir": "./dist",
     "rootDir": "./src"
   },
   "exclude": ["node_modules"],
-  "include": ["src", "src/utils/env.ts"]
+  "include": ["src", "src/utils/env.mts"]
 }

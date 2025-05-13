@@ -11,6 +11,7 @@ services:
       - 3000:3000
     networks:
       - app_network
+      
   api:
     container_name: api
     build:
@@ -24,6 +25,37 @@ services:
       - app_network
     volumes:
       - ./apps/api:/app/apps/api
+
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: password
+    volumes:
+      - .docker/db:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  pgadmin:
+    container_name: admin
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 8000:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    volumes:
+      - .docker/pgadmin/private/var/lib/pgadmin:/var/lib/pgadmin
+      - .docker/pgadmin/:/certs/server.cert
+      - .docker/pgadmin/:/certs/server.key
+      - .docker/pgadmin/tmp:/pgadmin4/server.key
+    networks:
+      - app_network
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
