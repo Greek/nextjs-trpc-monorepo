@@ -15,15 +15,17 @@ services:
     container_name: api
     build:
       context: .
+      target: dev
       dockerfile: ./apps/api/Dockerfile
     restart: always
     ports:
       - 3001:3001
     networks:
       - app_network
+    volumes:
+      - ./apps/api:/app/apps/api
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
 networks:
   app_network:
-    external: true
