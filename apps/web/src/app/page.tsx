@@ -4,8 +4,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "@repo/ui/button";
 import { useTRPC } from "../trpc/utils/trpc";
 import { useMutation } from "@tanstack/react-query";
-
-const API_HOST = process.env.NEXT_PUBLIC_API_HOST || "http://localhost:3001";
+import { env } from "../env";
 
 export default function Web() {
   const [name, setName] = useState<string>("");
@@ -28,7 +27,7 @@ export default function Web() {
 
   return (
     <div>
-      <h1>Web</h1>
+      <h1>Web ({env.NEXT_PUBLIC_DUMMY_VARIABLE})</h1>
       <form onSubmit={submit}>
         <label htmlFor="name">Name</label>
         <input

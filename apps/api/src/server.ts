@@ -1,4 +1,5 @@
 import { json, urlencoded } from "body-parser";
+import { ZodError } from "zod";
 import express, { type Express } from "express";
 import morgan from "morgan";
 import cors from "cors";
@@ -8,7 +9,6 @@ import { initTRPC } from "@trpc/server";
 
 // TRPC routers
 import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
-import { ZodError } from "zod";
 
 const createContext = ({
   req,
@@ -45,7 +45,6 @@ export const createServer = (): Express => {
   const app = express();
 
   app.disable("x-powered-by");
-
   if (process.env.NODE_ENV == "development") {
     app.use(morgan("dev"));
   } else {
