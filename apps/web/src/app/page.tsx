@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import { Button } from "@stashbase/ui/button";
+import { Button } from "@repo/ui/button";
 import { useTRPC } from "../trpc/utils/trpc";
 import { useMutation } from "@tanstack/react-query";
 

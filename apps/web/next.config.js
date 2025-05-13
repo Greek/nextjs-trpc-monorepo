@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["@stashbase/ui"],
+  transpilePackages: ["@repo/ui"],
   output: "standalone",
   experimental: {
     outputFileTracingRoot: path.join(__dirname, "../../"),
