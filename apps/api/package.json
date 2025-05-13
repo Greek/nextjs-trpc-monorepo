@@ -15,10 +15,12 @@
   },
   "dependencies": {
     "@stashbase/logger": "workspace:*",
+    "@trpc/server": "^11.1.2",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "express": "^4.18.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

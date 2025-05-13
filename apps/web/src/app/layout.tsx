@@ -1,3 +1,5 @@
+import { TRPCProviders } from "../trpc/query-client";
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +7,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <TRPCProviders>{children}</TRPCProviders>
+      </body>
     </html>
   );
 }

@@ -1,45 +1,36 @@
 "use client";
 
-import { useEffect, useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "@stashbase/ui/button";
+import { useTRPC } from "../trpc/utils/trpc";
+import { useMutation } from "@tanstack/react-query";
 
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST || "http://localhost:3001";
 
 export default function Web() {
   const [name, setName] = useState<string>("");
-  const [response, setResponse] = useState<{ message: string } | null>(null);
-  const [error, setError] = useState<string | undefined>();
 
-  useEffect(() => {
-    setResponse(null);
-    setError(undefined);
-  }, [name]);
+  const { stashbase: api } = useTRPC();
+  const response = useMutation(api.helloWorld.getName.mutationOptions());
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
-
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const result = await fetch(`${API_HOST}/message/${name}`);
-      const response = await result.json();
-      setResponse(response);
-    } catch (err) {
-      console.error(err);
-      setError("Unable to fetch response");
-    }
   };
 
   const onReset = () => {
     setName("");
   };
 
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    response.mutate(name);
+  };
+
   return (
     <div>
       <h1>Web</h1>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name">Name </label>
+      <form onSubmit={submit}>
+        <label htmlFor="name">Name</label>
         <input
           type="text"
           name="name"
@@ -49,17 +40,19 @@ export default function Web() {
         ></input>
         <Button type="submit">Submit</Button>
       </form>
-      {error && (
+      {name}
+
+      {response.error && (
         <div>
           <h3>Error</h3>
-          <p>{error}</p>
+          <p>{response.error.data?.validationError?.formErrors}</p>
         </div>
       )}
-      {response && (
+
+      {response.data && (
         <div>
           <h3>Greeting</h3>
-          <p>{response.message}</p>
-          <Button onClick={onReset}>Reset</Button>
+          <p>{response.data}</p>
         </div>
       )}
     </div>
