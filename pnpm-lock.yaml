@@ -17,7 +17,7 @@ importers:
 
   apps/api:
     dependencies:
-      '@repo/logger':
+      '@stashbase/logger':
         specifier: workspace:*
         version: link:../../packages/logger
       body-parser:
@@ -36,13 +36,13 @@ importers:
       '@jest/globals':
         specifier: ^29.7.0
         version: 29.7.0
-      '@repo/eslint-config':
+      '@stashbase/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@repo/jest-presets':
+      '@stashbase/jest-presets':
         specifier: workspace:*
         version: link:../../packages/jest-presets
-      '@repo/typescript-config':
+      '@stashbase/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@types/body-parser':
@@ -87,7 +87,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@repo/ui':
+      '@stashbase/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       next:
@@ -103,10 +103,10 @@ importers:
       '@next/eslint-plugin-next':
         specifier: ^14.1.1
         version: 14.2.28
-      '@repo/eslint-config':
+      '@stashbase/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@repo/typescript-config':
+      '@stashbase/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
       '@types/node':
@@ -163,13 +163,13 @@ importers:
       '@jest/globals':
         specifier: ^29.7.0
         version: 29.7.0
-      '@repo/eslint-config':
+      '@stashbase/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/jest-presets':
+      '@stashbase/jest-presets':
         specifier: workspace:*
         version: link:../jest-presets
-      '@repo/typescript-config':
+      '@stashbase/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
@@ -193,10 +193,10 @@ importers:
         specifier: ^18.2.0
         version: 18.3.1
     devDependencies:
-      '@repo/eslint-config':
+      '@stashbase/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@repo/typescript-config':
+      '@stashbase/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
       '@types/react':
