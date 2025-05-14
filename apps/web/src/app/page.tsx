@@ -9,8 +9,10 @@ import { env } from "@/env";
 export default function Web() {
   const [name, setName] = useState<string>("");
 
-  const { stashbase: api } = useTRPC();
-  const response = useMutation(api.helloWorld.getName.mutationOptions());
+  const { app: api } = useTRPC();
+  const response = useMutation<Record<string, unknown>>(
+    api.helloWorld.getName.mutationOptions()
+  );
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);

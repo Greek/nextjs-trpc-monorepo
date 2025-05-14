@@ -10,7 +10,7 @@ import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { useState } from "react";
 import { TRPCProvider } from ".";
 import { AppRouter } from "../../../../api/src/server";
-import { BASE_URL } from "../constants";
+import { BACKEND_URL, BASE_URL } from "../constants";
 
 let browserQueryClient: QueryClient | undefined = undefined;
 
@@ -68,5 +68,5 @@ export function TRPCProviders({ children }: { children: any }) {
 }
 
 function getBaseUrl() {
-  return `${BASE_URL}`;
+  return `${BACKEND_URL}`;
 }

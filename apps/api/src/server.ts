@@ -8,7 +8,15 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { initTRPC } from "@trpc/server";
 
 // TRPC routers
-import { helloWorldRouter } from "@/modules/hello-world/hello-world.router";
+import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
+
+interface CreateContextOptions {
+  // Empty, add your own options here.
+}
+
+export async function createContextInner(_opts: CreateContextOptions) {
+  return {};
+}
 
 const createContext = ({
   req,
@@ -16,6 +24,7 @@ const createContext = ({
 }: trpcExpress.CreateExpressContextOptions) => {
   return {};
 };
+
 
 type Context = Awaited<ReturnType<typeof createContext>>;
 
@@ -36,7 +45,7 @@ export const t = initTRPC.context<Context>().create({
 });
 
 export const rootRouter = t.router({
-  stashbase: t.router({
+  app: t.router({
     helloWorld: helloWorldRouter,
   }),
 });
@@ -54,6 +63,7 @@ export const createServer = (): Express => {
   app.use(urlencoded({ extended: true }));
   app.use(json());
   app.use(cors());
+  app.get("/status", (_, res) => res.status(200).json({ ok: true }));
   app.use(
     "/internal",
     trpcExpress.createExpressMiddleware({ router: rootRouter, createContext })
