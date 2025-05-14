@@ -9,7 +9,7 @@ interface CreateContextOptions {
   // Empty, add your own options here.
 }
 
-export async function createContextInner(_opts: CreateContextOptions) {
+export function createContextInner(_opts: CreateContextOptions) {
   return {};
 }
 

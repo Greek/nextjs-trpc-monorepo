@@ -4,7 +4,7 @@ import { createServer, rootRouter } from "../server";
 
 describe("Basic Tests", () => {
   // Create a caller so we can call our tRPC functions.
-  const caller = rootRouter.createCaller({});
+  const caller = rootRouter.createCaller({ inner: {} });
 
   it("status check returns 200", async () => {
     await supertest(createServer())
