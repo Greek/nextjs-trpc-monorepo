@@ -8,7 +8,7 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { initTRPC } from "@trpc/server";
 
 // TRPC routers
-import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
+import { helloWorldRouter } from "@/modules/hello-world/hello-world.router";
 
 const createContext = ({
   req,

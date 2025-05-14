@@ -2,9 +2,9 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "@repo/ui/button";
-import { useTRPC } from "../utils/trpc";
+import { useTRPC } from "@/utils/trpc";
 import { useMutation } from "@tanstack/react-query";
-import { env } from "../env";
+import { env } from "@/env";
 
 export default function Web() {
   const [name, setName] = useState<string>("");
