@@ -3,11 +3,11 @@ import { z } from "zod";
 import dotenv from "dotenv";
 
 dotenv.config({ path: [".env", ".env.local"] });
-
 export const env = createEnv({
   server: {
-    DATABASE_URI: z.string().url(),
-    DUMMY_ENV: z.string(),
+    BETTER_AUTH_URL: z.string().url(),
+    BETTER_AUTH_SECRET: z.string(),
+    DATABASE_URL: z.string().url(),
   },
 
   /**
