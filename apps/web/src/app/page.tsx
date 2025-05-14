@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "@repo/ui/button";
-import { useTRPC } from "../trpc/utils/trpc";
+import { useTRPC } from "../utils/trpc";
 import { useMutation } from "@tanstack/react-query";
 import { env } from "../env";
 
