@@ -25,8 +25,8 @@ WORKDIR /app
 
 # First install dependencies (as they change less often)
 COPY --from=builder /app/out/json/ .
-# RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
-RUN pnpm install
+RUN --mount=type=cache,id=s/pnpm-pnpm_store,target=/pnpm/store pnpm install
+# RUN pnpm install
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
