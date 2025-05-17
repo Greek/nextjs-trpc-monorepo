@@ -8,7 +8,6 @@ import cors from "cors";
 import { initalizeTRPCRouter, t } from "./utils/trpc";
 import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
 import { toNodeHandler } from "better-auth/node";
-import { env } from "./utils/env";
 import { ALLOWED_ORIGINS } from "./utils/constants";
 
 export const rootRouter = t.router({
