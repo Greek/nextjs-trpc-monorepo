@@ -1,4 +1,4 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { env } from '@/utils/env.mjs';
+import { env } from '@/utils/env.js';
 
 const db = drizzle(env.DATABASE_URL);

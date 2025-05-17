@@ -1,17 +1,9 @@
-version: "3"
+x-env_defaults: &env_defaults
+  - BETTER_AUTH_URL: "http://localhost:3000"
+  - BETTER_AUTH_SECRET: "abcdef"
+  - DATABASE_URL: "postgresql://app:password@localhost:5432/app"
 
 services:
-  web:
-    container_name: web
-    build:
-      context: .
-      dockerfile: ./apps/web/Dockerfile
-    restart: always
-    ports:
-      - 3000:3000
-    networks:
-      - app_network
-      
   api:
     container_name: api
     build:
@@ -24,7 +16,9 @@ services:
     networks:
       - app_network
     volumes:
-      - ./apps/api:/app/apps/api
+      - ./apps/api/src:/app/apps/api/src
+    environment:
+      <<: *env_defaults
 
   db:
     container_name: db
