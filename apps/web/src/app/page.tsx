@@ -2,12 +2,16 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Button } from "@repo/ui/button";
-import { useTRPC } from "@/utils/trpc";
+import { useTRPC } from "@/lib/trpc";
 import { useMutation } from "@tanstack/react-query";
 import { env } from "@/env";
 
-export default function Web() {
-  const [name, setName] = useState<string>("");
+export default function LoginForm() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const { app: api } = useTRPC();
   const response = useMutation<Record<string, unknown>>(
@@ -15,33 +19,58 @@ export default function Web() {
   );
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const onReset = () => {
-    setName("");
+    setForm({ name: "", email: "", password: "" });
   };
 
   const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    response.mutate(name);
+    // Example: send all fields, adjust as needed for your API
+    response.mutate(form);
   };
 
   return (
     <div>
-      <h1>Web ({env.NEXT_PUBLIC_DUMMY_VARIABLE})</h1>
+      <h1>Login ({env.NEXT_PUBLIC_DUMMY_VARIABLE})</h1>
       <form onSubmit={submit}>
         <label htmlFor="name">Name</label>
         <input
           type="text"
           name="name"
           id="name"
-          value={name}
+          value={form.name}
           onChange={onChange}
-        ></input>
-        <Button type="submit">Submit</Button>
+          required
+        />
+
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value={form.email}
+          onChange={onChange}
+          required
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          value={form.password}
+          onChange={onChange}
+          required
+        />
+
+        <Button type="submit">Login</Button>
+        <Button type="button" onClick={onReset}>
+          Reset
+        </Button>
       </form>
-      {name}
 
       {response.error && (
         <div>
@@ -52,8 +81,8 @@ export default function Web() {
 
       {response.data && (
         <div>
-          <h3>Greeting</h3>
-          <p>{response.data}</p>
+          <h3>Response</h3>
+          <p>{JSON.stringify(response.data)}</p>
         </div>
       )}
     </div>

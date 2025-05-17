@@ -1,4 +1,4 @@
-import { TRPCProviders } from "@/utils/trpc/query-client";
+import { TRPCProviders } from "@/lib/trpc/query-client";
 
 export default function RootLayout({
   children,
