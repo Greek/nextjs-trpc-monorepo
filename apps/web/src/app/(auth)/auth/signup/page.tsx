@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import { Button } from "@repo/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { ErrorContext, SuccessContext } from "better-auth/react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function SignupForm() {
   const router = useRouter();
@@ -49,11 +51,11 @@ export default function SignupForm() {
   };
 
   return (
-    <div>
-      <h1>Signup</h1>
+    <div className="flex flex-col justify-center items-center text-center prose-xl min-h-screen">
+      <h3>Signup</h3>
       <form onSubmit={submit} className="flex flex-col gap-y-4 w-2xs">
-        <label htmlFor="email">Name</label>
-        <input
+        <Label htmlFor="email">Name</Label>
+        <Input
           type="name"
           name="name"
           id="name"
@@ -62,8 +64,8 @@ export default function SignupForm() {
           required
         />
 
-        <label htmlFor="email">Email</label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           type="email"
           name="email"
           id="email"
@@ -72,8 +74,8 @@ export default function SignupForm() {
           required
         />
 
-        <label htmlFor="password">Password</label>
-        <input
+        <Label htmlFor="password">Password</Label>
+        <Input
           type="password"
           name="password"
           id="password"

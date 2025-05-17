@@ -1,7 +1,7 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import "./globals.css"
 
 export default function LoginForm() {
   const router = useRouter();
@@ -9,27 +9,27 @@ export default function LoginForm() {
 
   return (
     <>
-      <div>
-        <h1 className="text-sm">
+      <div className="flex flex-col justify-center items-center text-center prose-xl min-h-screen">
+        <h2>
           {session.data?.user
             ? `Hi ${session.data.user.name}!`
             : "Hello user! You are not signed in."}
-        </h1>
+        </h2>
 
-        <div className="flex flex-col gap-y-4 w-2xs">
+        <div className="flex flex-col gap-y-2 w-2xs">
           <p>You can do the following:</p>
 
           {session.data?.user && (
             <>
-              <button onClick={() => authClient.signOut()}>Sign out</button>
+              <Button onClick={() => authClient.signOut()}>Sign out</Button>
             </>
           )}
           {!session.data?.user && (
             <>
-              <button onClick={() => router.push("/auth/login")}>Login</button>
-              <button onClick={() => router.push("/auth/signup")}>
+              <Button onClick={() => router.push("/auth/login")}>Login</Button>
+              <Button onClick={() => router.push("/auth/signup")}>
                 Sign up
-              </button>
+              </Button>
             </>
           )}
         </div>
