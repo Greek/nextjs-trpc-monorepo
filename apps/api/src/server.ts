@@ -8,6 +8,7 @@ import cors from "cors";
 import { initalizeTRPCRouter, t } from "./utils/trpc";
 import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
 import { toNodeHandler } from "better-auth/node";
+import { env } from "./utils/env";
 
 export const rootRouter = t.router({
   app: t.router({
@@ -18,8 +19,16 @@ export const rootRouter = t.router({
 export const createServer = (): Express => {
   const app = express();
 
+  // Enable CORS before all else, otherwise you'll have a bad time.
+  app.use(
+    cors({
+      origin: env.CORS_ALLOWED_ORIGIN || "http://localhost:3000",
+      credentials: true,
+    })
+  );
+
   // Authentication handler.
-  app.all("/api/auth/*", toNodeHandler(auth))
+  app.all("/api/auth/*", toNodeHandler(auth));
 
   app.disable("x-powered-by");
   if (process.env.NODE_ENV == "development") {
@@ -30,7 +39,6 @@ export const createServer = (): Express => {
 
   app.use(urlencoded({ extended: true }));
   app.use(json());
-  app.use(cors());
   app.get("/status", (_, res) => res.status(200).json({ ok: true }));
   app.use("/internal", initalizeTRPCRouter(rootRouter));
 

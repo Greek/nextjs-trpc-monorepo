@@ -5,9 +5,10 @@ import dotenv from "dotenv";
 dotenv.config({ path: [".env", ".env.local"] });
 export const env = createEnv({
   server: {
+    DATABASE_URL: z.string().url(),
     BETTER_AUTH_URL: z.string().url(),
     BETTER_AUTH_SECRET: z.string(),
-    DATABASE_URL: z.string().url(),
+    CORS_ALLOWED_ORIGIN: z.string().optional(),
     PORT: z.number().optional(),
   },
 
