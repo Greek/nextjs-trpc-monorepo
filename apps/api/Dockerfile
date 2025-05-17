@@ -44,14 +44,19 @@ RUN pnpm turbo build
 FROM base AS prod
 WORKDIR /app
 
+RUN pnpm install -g esbuild-register
+
 # Don't run production as root
 RUN addgroup --system --gid 1001 expressjs
 RUN adduser --system --uid 1001 expressjs
 USER expressjs
 COPY --from=installer /app .
 
+# Switch to the API directory
+WORKDIR /app/apps/api
+
 # Production command
-CMD ["node", "apps/api/dist/index.js"]
+CMD ["node", "-r", "esbuild-register", "./dist/index.js"]
 
 # Development stage
 FROM base AS dev
