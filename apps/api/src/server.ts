@@ -9,6 +9,7 @@ import { initalizeTRPCRouter, t } from "./utils/trpc";
 import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
 import { toNodeHandler } from "better-auth/node";
 import { env } from "./utils/env";
+import { ALLOWED_ORIGINS } from "./utils/constants";
 
 export const rootRouter = t.router({
   app: t.router({
@@ -22,7 +23,7 @@ export const createServer = (): Express => {
   // Enable CORS before all else, otherwise you'll have a bad time.
   app.use(
     cors({
-      origin: env.CORS_ALLOWED_ORIGIN || "http://localhost:3000",
+      origin: ALLOWED_ORIGINS,
       credentials: true,
     })
   );
