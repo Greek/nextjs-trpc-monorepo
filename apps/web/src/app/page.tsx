@@ -1,90 +1,38 @@
 "use client";
-
-import { useState, ChangeEvent, FormEvent } from "react";
-import { Button } from "@repo/ui/button";
-import { useTRPC } from "@/lib/trpc";
-import { useMutation } from "@tanstack/react-query";
-import { env } from "@/env";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const { app: api } = useTRPC();
-  const response = useMutation<Record<string, unknown>>(
-    api.helloWorld.getName.mutationOptions()
-  );
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const onReset = () => {
-    setForm({ name: "", email: "", password: "" });
-  };
-
-  const submit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Example: send all fields, adjust as needed for your API
-    response.mutate(form);
-  };
+  const router = useRouter();
+  const session = authClient.useSession();
 
   return (
-    <div>
-      <h1>Login ({env.NEXT_PUBLIC_DUMMY_VARIABLE})</h1>
-      <form onSubmit={submit}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={form.name}
-          onChange={onChange}
-          required
-        />
+    <>
+      <div>
+        <h1>
+          {session.data?.user
+            ? `Hi ${session.data.user.name}!`
+            : "Hello user! You are not signed in."}
+        </h1>
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={form.email}
-          onChange={onChange}
-          required
-        />
+        <div style={{display: "flex", flexDirection: "column", width: "12rem", rowGap: "0.5rem"}}>
+          <p>You can do the following:</p>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={form.password}
-          onChange={onChange}
-          required
-        />
-
-        <Button type="submit">Login</Button>
-        <Button type="button" onClick={onReset}>
-          Reset
-        </Button>
-      </form>
-
-      {response.error && (
-        <div>
-          <h3>Error</h3>
-          <p>{response.error.data?.validationError?.formErrors}</p>
+          {session.data?.user && (
+            <>
+              <button onClick={() => authClient.signOut()}>Sign out</button>
+            </>
+          )}
+          {!session.data?.user && (
+            <>
+              <button onClick={() => router.push("/auth/login")}>Login</button>
+              <button onClick={() => router.push("/auth/signup")}>
+                Sign up
+              </button>
+            </>
+          )}
         </div>
-      )}
-
-      {response.data && (
-        <div>
-          <h3>Response</h3>
-          <p>{JSON.stringify(response.data)}</p>
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
