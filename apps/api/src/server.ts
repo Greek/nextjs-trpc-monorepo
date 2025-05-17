@@ -1,14 +1,14 @@
 import { json, urlencoded } from "body-parser";
-import { auth } from "./utils/auth";
+import { auth } from "./lib/auth";
+import { ALLOWED_ORIGINS } from "./lib/constants";
 import express, { type Express } from "express";
 import morgan from "morgan";
 import cors from "cors";
 
 // TRPC initializers and routers
-import { initalizeTRPCRouter, t } from "./utils/trpc";
+import { initalizeTRPCRouter, t } from "./lib/trpc";
 import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
 import { toNodeHandler } from "better-auth/node";
-import { ALLOWED_ORIGINS } from "./utils/constants";
 
 export const rootRouter = t.router({
   app: t.router({

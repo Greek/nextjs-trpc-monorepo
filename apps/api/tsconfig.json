@@ -11,5 +11,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["src", "src/utils/env.ts"]
+  "include": ["src", "src/lib/env.ts"]
 }
