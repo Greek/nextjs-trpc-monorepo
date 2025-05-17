@@ -28,7 +28,7 @@ export const createServer = (): Express => {
   );
 
   // Authentication handler.
-  app.all("/api/auth/*", toNodeHandler(auth));
+  app.all("/auth/*", toNodeHandler(auth));
 
   app.disable("x-powered-by");
   if (process.env.NODE_ENV == "development") {
