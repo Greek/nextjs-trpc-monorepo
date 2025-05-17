@@ -6,9 +6,8 @@ RUN corepack enable
 FROM base AS build
 COPY . /usr/src/app
 WORKDIR /usr/src/app
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=s/nextjs-trpc-monorepo-/pnpm/store,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run --filter=api build
-# RUN pnpm deploy --filter=app1 --prod /prod/app1
 RUN pnpm deploy --filter=api --force-legacy-deploy --prod /prod/api
 
 FROM base AS api
