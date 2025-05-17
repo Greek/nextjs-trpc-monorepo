@@ -38,9 +38,6 @@ importers:
       dotenv:
         specifier: ^16.5.0
         version: 16.5.0
-      drizzle-orm:
-        specifier: ^0.43.1
-        version: 0.43.1(@types/pg@8.15.1)(kysely@0.28.2)(pg@8.16.0)
       express:
         specifier: ^4.18.3
         version: 4.21.2
@@ -90,6 +87,9 @@ importers:
       drizzle-kit:
         specifier: ^0.31.1
         version: 0.31.1
+      drizzle-orm:
+        specifier: ^0.43.1
+        version: 0.43.1(@types/pg@8.15.1)(kysely@0.28.2)(pg@8.16.0)
       esbuild:
         specifier: ^0.20.1
         version: 0.20.2
@@ -138,6 +138,9 @@ importers:
       '@trpc/tanstack-react-query':
         specifier: ^11.1.2
         version: 11.1.2(@tanstack/react-query@5.76.0(react@18.3.1))(@trpc/client@11.1.2(@trpc/server@11.1.2(typescript@5.5.4))(typescript@5.5.4))(@trpc/server@11.1.2(typescript@5.5.4))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.5.4)
+      better-auth:
+        specifier: ^1.2.8
+        version: 1.2.8
       next:
         specifier: ^14.1.1
         version: 14.2.28(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
