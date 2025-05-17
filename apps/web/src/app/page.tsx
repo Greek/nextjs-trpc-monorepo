@@ -1,6 +1,7 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import "./globals.css"
 
 export default function LoginForm() {
   const router = useRouter();
@@ -9,13 +10,13 @@ export default function LoginForm() {
   return (
     <>
       <div>
-        <h1>
+        <h1 className="text-sm">
           {session.data?.user
             ? `Hi ${session.data.user.name}!`
             : "Hello user! You are not signed in."}
         </h1>
 
-        <div style={{display: "flex", flexDirection: "column", width: "12rem", rowGap: "0.5rem"}}>
+        <div className="flex flex-col gap-y-4 w-2xs">
           <p>You can do the following:</p>
 
           {session.data?.user && (

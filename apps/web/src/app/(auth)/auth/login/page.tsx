@@ -49,15 +49,7 @@ export default function LoginForm() {
   return (
     <div>
       <h1>Login</h1>
-      <form
-        onSubmit={submit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          rowGap: "0.5rem",
-          width: "12rem",
-        }}
-      >
+      <form onSubmit={submit} className="flex flex-col gap-y-4 w-2xs">
         <label htmlFor="email">Email</label>
         <input
           type="email"

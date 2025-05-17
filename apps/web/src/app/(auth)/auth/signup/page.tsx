@@ -51,15 +51,7 @@ export default function SignupForm() {
   return (
     <div>
       <h1>Signup</h1>
-      <form
-        onSubmit={submit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          rowGap: "0.5rem",
-          width: "12rem",
-        }}
-      >
+      <form onSubmit={submit} className="flex flex-col gap-y-4 w-2xs">
         <label htmlFor="email">Name</label>
         <input
           type="name"
@@ -69,7 +61,7 @@ export default function SignupForm() {
           onChange={onChange}
           required
         />
-        
+
         <label htmlFor="email">Email</label>
         <input
           type="email"
