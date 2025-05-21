@@ -1,5 +1,5 @@
 x-env_defaults: &env_defaults
-  DATABASE_URL: "postgresql://app:password@localhost:5432/app"
+  DATABASE_URL: "postgresql://app:example@db:5432/app"
   BETTER_AUTH_URL: "http://localhost:3001"
   BETTER_AUTH_SECRET: "abcdef"
   CORS_ALLOWED_ORIGINS: "http://localhost:3000,http://example.com"
@@ -9,7 +9,7 @@ services:
     container_name: api
     build:
       context: .
-      target: prod
+      target: dev
       dockerfile: ./apps/api/Dockerfile
     restart: always
     ports:
