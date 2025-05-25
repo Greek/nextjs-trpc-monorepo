@@ -11,7 +11,9 @@ export default function LoginForm() {
 
   const { app } = useTRPC();
   const getNameMutation = useMutation(app.helloWorld.getName.mutationOptions());
-  const protected_getNameMutation = useMutation(app.helloWorld.protected_getName.mutationOptions());
+  const protected_getNameMutation = useMutation(
+    app.helloWorld.protected_getName.mutationOptions()
+  );
 
   return (
     <>
@@ -28,8 +30,12 @@ export default function LoginForm() {
           {session.data?.user && (
             <>
               <Button onClick={() => authClient.signOut()}>Sign out</Button>
-              <Button onClick={() => getNameMutation.mutate("world")}>Get hello</Button>
-              <Button onClick={() => protected_getNameMutation.mutate("world")}>(Protected) Get hello</Button>
+              <Button onClick={() => getNameMutation.mutate("world")}>
+                Get hello
+              </Button>
+              <Button onClick={() => protected_getNameMutation.mutate("world")}>
+                (Protected) Get hello
+              </Button>
             </>
           )}
           {!session.data?.user && (
@@ -38,11 +44,22 @@ export default function LoginForm() {
               <Button onClick={() => router.push("/auth/signup")}>
                 Sign up
               </Button>
-              <Button onClick={() => getNameMutation.mutate("world")}>Get hello</Button>
-              <Button onClick={() => protected_getNameMutation.mutate("world")}>(Protected) Get hello</Button>
+              <Button onClick={() => getNameMutation.mutate("world")}>
+                Get hello
+              </Button>
+              <Button onClick={() => protected_getNameMutation.mutate("world")}>
+                (Protected) Get hello
+              </Button>
             </>
           )}
-          {getNameMutation.data as string && <p>{getNameMutation.data as string}</p>}
+          {getNameMutation.data && <p>{getNameMutation.data}</p>}
+          {getNameMutation.error && <p>{getNameMutation.error.message}</p>}
+          {protected_getNameMutation.data && (
+            <p>{protected_getNameMutation.data}</p>
+          )}
+          {protected_getNameMutation.error && (
+            <p>{protected_getNameMutation.error.message}</p>
+          )}
         </div>
       </div>
     </>

@@ -54,6 +54,12 @@ export function TRPCProviders({ children }: { children: any }) {
       links: [
         httpBatchLink({
           url: `${getBaseUrl()}/internal`,
+          fetch(url, options) {
+            return fetch(url, {
+              ...(options as RequestInit),
+              credentials: "include",
+            });
+          },
         }),
       ],
     })
