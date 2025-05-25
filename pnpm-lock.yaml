@@ -79,7 +79,7 @@ importers:
         specifier: ^1.9.9
         version: 1.9.9
       '@types/node':
-        specifier: ^20.17.46
+        specifier: ^20.17.47
         version: 20.17.47
       '@types/pg':
         specifier: ^8.15.1
