@@ -21,3 +21,4 @@ export class HelloWorldModule {
     return `Hello ${opts.input}! What's up ${opts.ctx.user?.name}?`;
   }
 }
+
