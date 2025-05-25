@@ -26,3 +26,4 @@ export const SENDER_NAME =
   process.env.NEXT_PUBLIC_SENDGRID_SENDER_NAME || "";
 
 export const MIN_PASSWORD_LENGTH = /.{8,}/;
+export const MAX_PASSWORD_LENGTH = 128;

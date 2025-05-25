@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/card";
 import { Check, X } from "lucide-react";
 import { validatePassword } from "@/lib/passwords";
+import { APP_NAME, MAX_PASSWORD_LENGTH } from "@/lib/constants";
 import Link from "next/link";
-import { APP_NAME } from "@/lib/constants";
 
 export default function SignupForm() {
   const [form, setForm] = useState({
@@ -29,7 +29,8 @@ export default function SignupForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const passwordChecks = validatePassword(form.password);
-  const isPasswordValid = Object.values(passwordChecks).every(Boolean);
+  // const isPasswordValid = Object.values(passwordChecks).every(Boolean);
+  const isPasswordValid = true;
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -53,6 +54,10 @@ export default function SignupForm() {
     }
 
     // Validate password
+    if (form.password.length > MAX_PASSWORD_LENGTH) {
+      newErrors.password = "Password cannot be longer than <kbd>128</kbd> characters."
+    }
+
     if (!form.password) {
       newErrors.password = "Password is required";
     } else if (!isPasswordValid) {
@@ -75,11 +80,17 @@ export default function SignupForm() {
           name: form.name,
           email: form.email,
           password: form.password,
-          callbackURL: "/",
         },
         {
           onRequest(): void {
             setIsSignupLoading(true);
+          },
+          async onSuccess() {
+            await authClient.signIn.email({
+              email: form.email,
+              password: form.password,
+              callbackURL: "/",
+            });
           },
           onError(ctx): void {
             setIsSignupLoading(false);
@@ -165,7 +176,7 @@ export default function SignupForm() {
                 required
               />
               {errors.password && (
-                <p className="text-sm text-red-500">{errors.password}</p>
+                <p className="text-sm text-red-500" dangerouslySetInnerHTML={{__html: errors.password }} />
               )}
 
               <div className="mt-2 p-3 bg-gray-50 rounded-md space-y-1">
@@ -212,7 +223,10 @@ export default function SignupForm() {
               )}
             </div>
             {errors.signUpError && (
-              <p className="text-sm text-red-500">{errors.signUpError}</p>
+              <p
+                className="text-sm text-red-500"
+                dangerouslySetInnerHTML={{ __html: errors.signUpError }}
+              />
             )}
             <span />
           </CardContent>
@@ -227,7 +241,10 @@ export default function SignupForm() {
             </Button>
             <div className="text-sm text-center text-muted-foreground">
               Already have an account?{" "}
-              <Link href={"/auth/login"} className="text-primary hover:underline">
+              <Link
+                href={"/auth/login"}
+                className="text-primary hover:underline"
+              >
                 Log In
               </Link>
             </div>
