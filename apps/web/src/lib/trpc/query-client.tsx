@@ -9,8 +9,8 @@ import superjson from "superjson";
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { useState } from "react";
 import { TRPCProvider } from ".";
-import { AppRouter } from "@api/server";
 import { BACKEND_URL } from "@/lib/constants";
+import type { AppRouter } from "@api/server";
 
 let browserQueryClient: QueryClient | undefined = undefined;
 

@@ -1,11 +1,17 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import { useTRPC } from "@/lib/trpc";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const router = useRouter();
   const session = authClient.useSession();
+
+  const { app } = useTRPC();
+  const getNameMutation = useMutation(app.helloWorld.getName.mutationOptions());
+  const protected_getNameMutation = useMutation(app.helloWorld.protected_getName.mutationOptions());
 
   return (
     <>
@@ -22,6 +28,8 @@ export default function LoginForm() {
           {session.data?.user && (
             <>
               <Button onClick={() => authClient.signOut()}>Sign out</Button>
+              <Button onClick={() => getNameMutation.mutate("world")}>Get hello</Button>
+              <Button onClick={() => protected_getNameMutation.mutate("world")}>(Protected) Get hello</Button>
             </>
           )}
           {!session.data?.user && (
@@ -30,8 +38,11 @@ export default function LoginForm() {
               <Button onClick={() => router.push("/auth/signup")}>
                 Sign up
               </Button>
+              <Button onClick={() => getNameMutation.mutate("world")}>Get hello</Button>
+              <Button onClick={() => protected_getNameMutation.mutate("world")}>(Protected) Get hello</Button>
             </>
           )}
+          {getNameMutation.data as string && <p>{getNameMutation.data as string}</p>}
         </div>
       </div>
     </>
