@@ -28,12 +28,9 @@ const createContext = async ({
     {}
   );
 
-  console.log(headers);
   const currSess = await auth.api.getSession({
-    headers: new Headers(),
+    headers: new Headers(headers),
   });
-
-  console.log(currSess);
 
   return {
     session: currSess?.session,
