@@ -4,16 +4,35 @@ import { authClient } from "@/lib/auth-client";
 import { useTRPC } from "@/lib/trpc";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { FormEvent } from "react";
 
 export default function LoginForm() {
   const router = useRouter();
   const session = authClient.useSession();
 
   const { app } = useTRPC();
-  const getNameMutation = useMutation(app.helloWorld.getName.mutationOptions());
-  const protected_getNameMutation = useMutation(
-    app.helloWorld.protected_getName.mutationOptions()
+  const getNameMutation = useMutation(
+    app.helloWorld.getName.mutationOptions({
+      onMutate() {
+        protected_getNameMutation.reset();
+      },
+    })
   );
+  const protected_getNameMutation = useMutation(
+    app.helloWorld.protected_getName.mutationOptions({
+      onMutate() {
+        getNameMutation.reset();
+      },
+    })
+  );
+
+  const performSignOut = (e: FormEvent) => {
+    e.preventDefault();
+    authClient.signOut();
+
+    getNameMutation.reset();
+    protected_getNameMutation.reset();
+  };
 
   return (
     <>
@@ -27,17 +46,6 @@ export default function LoginForm() {
         <div className="flex flex-col gap-y-2 w-2xs">
           <p>You can do the following:</p>
 
-          {session.data?.user && (
-            <>
-              <Button onClick={() => authClient.signOut()}>Sign out</Button>
-              <Button onClick={() => getNameMutation.mutate("world")}>
-                Get hello
-              </Button>
-              <Button onClick={() => protected_getNameMutation.mutate("world")}>
-                (Protected) Get hello
-              </Button>
-            </>
-          )}
           {!session.data?.user && (
             <>
               <Button onClick={() => router.push("/auth/login")}>Login</Button>
@@ -52,8 +60,22 @@ export default function LoginForm() {
               </Button>
             </>
           )}
+
+          {session.data?.user && (
+            <>
+              <Button onClick={(e) => performSignOut(e)}>Sign out</Button>
+              <Button onClick={() => getNameMutation.mutate("world")}>
+                Get hello
+              </Button>
+              <Button onClick={() => protected_getNameMutation.mutate("world")}>
+                (Protected) Get hello
+              </Button>
+            </>
+          )}
+
           {getNameMutation.data && <p>{getNameMutation.data}</p>}
           {getNameMutation.error && <p>{getNameMutation.error.message}</p>}
+
           {protected_getNameMutation.data && (
             <p>{protected_getNameMutation.data}</p>
           )}
