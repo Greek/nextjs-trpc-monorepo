@@ -9,7 +9,7 @@ services:
     container_name: api
     build:
       context: .
-      target: dev
+      target: prod
       dockerfile: ./apps/api/Dockerfile
     restart: always
     ports:
