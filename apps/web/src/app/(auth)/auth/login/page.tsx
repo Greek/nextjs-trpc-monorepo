@@ -1,96 +1,121 @@
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
-import { authClient } from "@/lib/auth-client";
-import { ErrorContext, SuccessContext } from "better-auth/react";
+import { authClient, translateAuthErrorCode } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
+import { APP_NAME } from "@/lib/constants";
 
-export default function LoginForm() {
+export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
-  const [loginResponse, setLoginResponse] = useState<SuccessContext>();
-  const [loginError, setLoginError] = useState<ErrorContext>();
+  const [isLoginLoading, setIsLoginLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const onReset = () => {
-    setForm({ email: "", password: "" });
-  };
-
-  const submit = async (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
     await authClient.signIn.email(
       {
         email: form.email,
         password: form.password,
-        // callbackURL: "/"
+        callbackURL: "/",
       },
       {
-        onSuccess(ctx): void {
-          setLoginError(undefined);
-          setLoginResponse(ctx);
+        onRequest(): void {
+          setIsLoginLoading(true);
+        },
+        onSuccess(): void {
+          setErrors({});
           setTimeout(() => {
             router.push("/");
           }, 2000);
         },
         onError(ctx): void {
-          setLoginError(ctx);
+          setIsLoginLoading(false);
+          setErrors({ loginError: translateAuthErrorCode(ctx) });
         },
       }
     );
   };
 
   return (
-    <div className="flex flex-col justify-center items-center text-center prose-xl min-h-screen">
-      <h3>Login</h3>
-      <form onSubmit={submit} className="flex flex-col gap-y-4 w-2xs">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          value={form.email}
-          onChange={onChange}
-          required
-        />
-
-        <Label htmlFor="password">Password</Label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          value={form.password}
-          onChange={onChange}
-          required
-        />
-
-        <Button type="submit">Login</Button>
-        <Button type="button" onClick={onReset}>
-          Reset
-        </Button>
-      </form>
-
-      {loginError?.error && (
-        <div>
-          <h3>Error</h3>
-          <p>{loginError.error.message}</p>
-        </div>
-      )}
-
-      {loginResponse?.data && (
-        <div>
-          <h3>Response</h3>
-          <p>{JSON.stringify(loginResponse.data)}</p>
-        </div>
-      )}
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold text-center">
+            Log In
+          </CardTitle>
+          <CardDescription className="text-center">
+            Enter your email and password to access {APP_NAME}.
+          </CardDescription>
+        </CardHeader>
+        <form onSubmit={submit}>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                value={form.email}
+                onChange={onChange}
+                className={errors.email ? "border-red-500" : ""}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                value={form.password}
+                onChange={onChange}
+                className={errors.email ? "border-red-500" : ""}
+                required
+              />
+              {errors.loginError && (
+                <p className="text-sm text-red-500">{errors.loginError}</p>
+              )}
+            </div>
+            <span />
+          </CardContent>
+          <CardFooter className="flex flex-col space-y-4">
+            <Button className="w-full" disabled={isLoginLoading}>
+              Sign in
+            </Button>
+            <div className="text-sm text-center text-muted-foreground">
+              Don't have an account?{" "}
+              <Link
+                href="/auth/signup"
+                className="text-primary hover:underline"
+              >
+                Sign up
+              </Link>
+            </div>
+          </CardFooter>
+        </form>
+      </Card>
     </div>
   );
 }
