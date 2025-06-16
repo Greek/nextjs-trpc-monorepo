@@ -5,8 +5,11 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
+    "format:write": "prettier --write \"**/*.{ts,tsx,js,jsx,mdx}\" --cache",
     "lint": "eslint . --max-warnings 0",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.6",
@@ -40,6 +43,8 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "eslint": "^8.57.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.12",
     "tw-animate-css": "^1.3.0",
     "typescript": "5.7.2"
   }

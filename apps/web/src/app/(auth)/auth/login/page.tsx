@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, ChangeEvent, FormEvent } from "react";
-import { authClient, translateAuthErrorCode } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { authClient, translateAuthErrorCode } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -11,17 +11,17 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { APP_NAME } from "@/lib/constants";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import Link from 'next/link';
+import { APP_NAME } from '@/lib/constants';
 
 export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [isLoginLoading, setIsLoginLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -36,7 +36,7 @@ export default function LoginPage() {
       {
         email: form.email,
         password: form.password,
-        callbackURL: "/",
+        callbackURL: '/',
       },
       {
         onRequest(): void {
@@ -45,14 +45,14 @@ export default function LoginPage() {
         onSuccess(): void {
           setErrors({});
           setTimeout(() => {
-            router.push("/");
+            router.push('/');
           }, 2000);
         },
         onError(ctx): void {
           setIsLoginLoading(false);
           setErrors({ loginError: translateAuthErrorCode(ctx) });
         },
-      }
+      },
     );
   };
 
@@ -78,7 +78,7 @@ export default function LoginPage() {
                 placeholder="Enter your email"
                 value={form.email}
                 onChange={onChange}
-                className={errors.email ? "border-red-500" : ""}
+                className={errors.email ? 'border-red-500' : ''}
                 required
               />
             </div>
@@ -91,7 +91,7 @@ export default function LoginPage() {
                 placeholder="Enter your password"
                 value={form.password}
                 onChange={onChange}
-                className={errors.email ? "border-red-500" : ""}
+                className={errors.email ? 'border-red-500' : ''}
                 required
               />
               {errors.loginError && (
@@ -105,7 +105,7 @@ export default function LoginPage() {
               Sign in
             </Button>
             <div className="text-sm text-center text-muted-foreground">
-              Don't have an account?{" "}
+              Don't have an account?{' '}
               <Link
                 href="/auth/signup"
                 className="text-primary hover:underline"

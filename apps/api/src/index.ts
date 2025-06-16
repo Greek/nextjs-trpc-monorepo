@@ -1,5 +1,5 @@
-import { createServer } from "./server";
-import { env } from "./lib/env";
+import { createServer } from './server';
+import { env } from './lib/env';
 
 const port = env.PORT || 3001;
 const server = createServer();

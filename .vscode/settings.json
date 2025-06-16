@@ -1,4 +1,9 @@
 {
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeimports": "always"
+  },
   "eslint.workingDirectories": [
     {
       "mode": "auto"

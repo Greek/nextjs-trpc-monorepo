@@ -1,4 +1,4 @@
-import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from "./constants";
+import { MAX_PASSWORD_LENGTH, MIN_PASSWORD_LENGTH } from './constants';
 
 export const passwordValidation = {
   minLength: MIN_PASSWORD_LENGTH,

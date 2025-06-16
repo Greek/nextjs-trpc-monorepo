@@ -1,4 +1,4 @@
-import { MIN_PASSWORD_LENGTH } from "./constants";
+import { MIN_PASSWORD_LENGTH } from './constants';
 
 export const passwordValidation = {
   minLength: MIN_PASSWORD_LENGTH,
@@ -17,4 +17,3 @@ export const validatePassword = (password: string) => {
     hasSpecialChar: passwordValidation.hasSpecialChar.test(password),
   };
 };
-

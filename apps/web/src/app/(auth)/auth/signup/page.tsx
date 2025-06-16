@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useState, ChangeEvent, FormEvent } from "react";
-import { authClient, translateAuthErrorCode } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { authClient, translateAuthErrorCode } from '@/lib/auth-client';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import {
   Card,
   CardContent,
@@ -12,18 +12,18 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Check, X } from "lucide-react";
-import { validatePassword } from "@/lib/passwords";
-import { APP_NAME, MAX_PASSWORD_LENGTH } from "@/lib/constants";
-import Link from "next/link";
+} from '@/components/ui/card';
+import { Check, X } from 'lucide-react';
+import { validatePassword } from '@/lib/passwords';
+import { APP_NAME, MAX_PASSWORD_LENGTH } from '@/lib/constants';
+import Link from 'next/link';
 
 export default function SignupForm() {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
   const [isSignupLoading, setIsSignupLoading] = useState<boolean>();
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -42,33 +42,34 @@ export default function SignupForm() {
 
     // Validate name
     if (!form.name.trim()) {
-      newErrors.name = "Name is required";
+      newErrors.name = 'Name is required';
     }
 
     // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!form.email) {
-      newErrors.email = "Email is required";
+      newErrors.email = 'Email is required';
     } else if (!emailRegex.test(form.email)) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = 'Please enter a valid email';
     }
 
     // Validate password
     if (form.password.length > MAX_PASSWORD_LENGTH) {
-      newErrors.password = "Password cannot be longer than <kbd>128</kbd> characters."
+      newErrors.password =
+        'Password cannot be longer than <kbd>128</kbd> characters.';
     }
 
     if (!form.password) {
-      newErrors.password = "Password is required";
+      newErrors.password = 'Password is required';
     } else if (!isPasswordValid) {
-      newErrors.password = "Password does not meet requirements";
+      newErrors.password = 'Password does not meet requirements';
     }
 
     // Validate confirm password
     if (!form.confirmPassword) {
-      newErrors.confirmPassword = "Please confirm your password";
+      newErrors.confirmPassword = 'Please confirm your password';
     } else if (form.password !== form.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
+      newErrors.confirmPassword = 'Passwords do not match';
     }
 
     setErrors(newErrors);
@@ -89,14 +90,14 @@ export default function SignupForm() {
             await authClient.signIn.email({
               email: form.email,
               password: form.password,
-              callbackURL: "/",
+              callbackURL: '/',
             });
           },
           onError(ctx): void {
             setIsSignupLoading(false);
             setErrors({ signUpError: translateAuthErrorCode(ctx) });
           },
-        }
+        },
       );
     }
   };
@@ -109,7 +110,7 @@ export default function SignupForm() {
     text: string;
   }) => (
     <div
-      className={`flex items-center gap-2 text-sm ${met ? "text-green-600" : "text-gray-500"}`}
+      className={`flex items-center gap-2 text-sm ${met ? 'text-green-600' : 'text-gray-500'}`}
     >
       {met ? <Check className="h-4 w-4" /> : <X className="h-4 w-4" />}
       <span>{text}</span>
@@ -138,7 +139,7 @@ export default function SignupForm() {
                 placeholder="Enter your full name"
                 value={form.name}
                 onChange={onChange}
-                className={errors.name ? "border-red-500" : ""}
+                className={errors.name ? 'border-red-500' : ''}
                 required
               />
               {errors.name && (
@@ -155,7 +156,7 @@ export default function SignupForm() {
                 placeholder="Enter your email"
                 value={form.email}
                 onChange={onChange}
-                className={errors.email ? "border-red-500" : ""}
+                className={errors.email ? 'border-red-500' : ''}
                 required
               />
               {errors.email && (
@@ -172,11 +173,14 @@ export default function SignupForm() {
                 placeholder="Create a password"
                 value={form.password}
                 onChange={onChange}
-                className={errors.password ? "border-red-500" : ""}
+                className={errors.password ? 'border-red-500' : ''}
                 required
               />
               {errors.password && (
-                <p className="text-sm text-red-500" dangerouslySetInnerHTML={{__html: errors.password }} />
+                <p
+                  className="text-sm text-red-500"
+                  dangerouslySetInnerHTML={{ __html: errors.password }}
+                />
               )}
 
               <div className="mt-2 p-3 bg-gray-50 rounded-md space-y-1">
@@ -215,7 +219,7 @@ export default function SignupForm() {
                 placeholder="Confirm your password"
                 value={form.confirmPassword}
                 onChange={onChange}
-                className={errors.confirmPassword ? "border-red-500" : ""}
+                className={errors.confirmPassword ? 'border-red-500' : ''}
                 required
               />
               {errors.confirmPassword && (
@@ -240,9 +244,9 @@ export default function SignupForm() {
               Create Account
             </Button>
             <div className="text-sm text-center text-muted-foreground">
-              Already have an account?{" "}
+              Already have an account?{' '}
               <Link
-                href={"/auth/login"}
+                href={'/auth/login'}
                 className="text-primary hover:underline"
               >
                 Log In

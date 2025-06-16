@@ -1,10 +1,10 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
-import { useTRPC } from "@/lib/trpc";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+'use client';
+import { Button } from '@/components/ui/button';
+import { authClient } from '@/lib/auth-client';
+import { useTRPC } from '@/lib/trpc';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { FormEvent } from 'react';
 
 export default function LoginForm() {
   const router = useRouter();
@@ -16,14 +16,14 @@ export default function LoginForm() {
       onMutate() {
         protected_getNameMutation.reset();
       },
-    })
+    }),
   );
   const protected_getNameMutation = useMutation(
     app.helloWorld.protected_getName.mutationOptions({
       onMutate() {
         getNameMutation.reset();
       },
-    })
+    }),
   );
 
   const performSignOut = (e: FormEvent) => {
@@ -40,7 +40,7 @@ export default function LoginForm() {
         <h2>
           {session.data?.user
             ? `Hi ${session.data.user.name}!`
-            : "Hello user! You are not signed in."}
+            : 'Hello user! You are not signed in.'}
         </h2>
 
         <div className="flex flex-col gap-y-2 w-2xs">
@@ -48,14 +48,14 @@ export default function LoginForm() {
 
           {!session.data?.user && (
             <>
-              <Button onClick={() => router.push("/auth/login")}>Login</Button>
-              <Button onClick={() => router.push("/auth/signup")}>
+              <Button onClick={() => router.push('/auth/login')}>Login</Button>
+              <Button onClick={() => router.push('/auth/signup')}>
                 Sign up
               </Button>
-              <Button onClick={() => getNameMutation.mutate("world")}>
+              <Button onClick={() => getNameMutation.mutate('world')}>
                 Get hello
               </Button>
-              <Button onClick={() => protected_getNameMutation.mutate("world")}>
+              <Button onClick={() => protected_getNameMutation.mutate('world')}>
                 (Protected) Get hello
               </Button>
             </>
@@ -64,10 +64,10 @@ export default function LoginForm() {
           {session.data?.user && (
             <>
               <Button onClick={(e) => performSignOut(e)}>Sign out</Button>
-              <Button onClick={() => getNameMutation.mutate("world")}>
+              <Button onClick={() => getNameMutation.mutate('world')}>
                 Get hello
               </Button>
-              <Button onClick={() => protected_getNameMutation.mutate("world")}>
+              <Button onClick={() => protected_getNameMutation.mutate('world')}>
                 (Protected) Get hello
               </Button>
             </>

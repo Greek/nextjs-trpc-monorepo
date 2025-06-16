@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { initTRPC } from "@trpc/server";
-import { HelloWorldModule } from "./hello-world-module";
-import { protectedProcedure, publicProcedure } from "../../lib/trpc";
+import { z } from 'zod';
+import { initTRPC } from '@trpc/server';
+import { HelloWorldModule } from './hello-world-module';
+import { protectedProcedure, publicProcedure } from '../../lib/trpc';
 
 const t = initTRPC.create();
 const helloWorldRouter = t.router({

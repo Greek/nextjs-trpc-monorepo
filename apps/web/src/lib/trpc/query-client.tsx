@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
 import {
   defaultShouldDehydrateQuery,
   QueryClient,
   QueryClientProvider,
-} from "@tanstack/react-query";
-import superjson from "superjson";
-import { createTRPCClient, httpBatchLink } from "@trpc/client";
-import { useState } from "react";
-import { TRPCProvider } from ".";
-import { BACKEND_URL } from "@/lib/constants";
-import type { AppRouter } from "@api/server";
+} from '@tanstack/react-query';
+import superjson from 'superjson';
+import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import { useState } from 'react';
+import { TRPCProvider } from '.';
+import { BACKEND_URL } from '@/lib/constants';
+import type { AppRouter } from '@api/server';
 
 let browserQueryClient: QueryClient | undefined = undefined;
 
@@ -24,7 +24,7 @@ function makeQueryClient() {
         serializeData: superjson.serialize,
         shouldDehydrateQuery: (query) =>
           defaultShouldDehydrateQuery(query) ||
-          query.state.status === "pending",
+          query.state.status === 'pending',
       },
       hydrate: {
         deserializeData: superjson.deserialize,
@@ -34,7 +34,7 @@ function makeQueryClient() {
 }
 
 function getQueryClient() {
-  if (typeof window === "undefined") {
+  if (typeof window === 'undefined') {
     // Server: always make a new query client
     return makeQueryClient();
   } else {
@@ -57,12 +57,12 @@ export function TRPCProviders({ children }: { children: any }) {
           fetch(url, options) {
             return fetch(url, {
               ...(options as RequestInit),
-              credentials: "include",
+              credentials: 'include',
             });
           },
         }),
       ],
-    })
+    }),
   );
   return (
     <QueryClientProvider client={queryClient}>

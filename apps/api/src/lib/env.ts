@@ -1,14 +1,14 @@
-import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod";
-import dotenv from "dotenv";
+import { createEnv } from '@t3-oss/env-core';
+import dotenv from 'dotenv';
+import { z } from 'zod';
 
-dotenv.config({ path: [".env.local"] });
+dotenv.config({ path: ['.env.local'] });
 export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
     BETTER_AUTH_URL: z.string().url(),
     BETTER_AUTH_SECRET: z.string(),
-    CORS_ALLOWED_ORIGINS: z.string().optional().default("*"),
+    CORS_ALLOWED_ORIGINS: z.string().optional().default('*'),
     PORT: z.string().optional(),
   },
 

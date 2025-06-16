@@ -1,5 +1,5 @@
-import { TRPCProviders } from "@/lib/trpc/query-client";
-import "./globals.css"
+import { TRPCProviders } from '@/lib/trpc/query-client';
+import './globals.css';
 
 export default function RootLayout({
   children,
