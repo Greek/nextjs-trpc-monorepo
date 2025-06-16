@@ -1,23 +1,15 @@
-# Turborepo Docker starter
+# NextJS + Express + tRPC Monorepo
 
-This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
+This repo is a template for setting up a monorepo with a NextJS frontend, and Express & tRPC backend.
 
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-docker
-```
-
-## What's inside?
+It includes basic authentication functionality and a boilerplate to get setup!
 
 This Turborepo includes the following:
 
 ### Apps and Packages
 
 - `web`: a [Next.js](https://nextjs.org/) app
-- `api`: an [Express](https://expressjs.com/) server
+- `api`: an [Express](https://expressjs.com/) server with tRPC
 - `@repo/ui`: a React component library
 - `@repo/logger`: Isomorphic logger (a small wrapper around console.log)
 - `@repo/eslint-config`: ESLint presets
@@ -26,33 +18,50 @@ This Turborepo includes the following:
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-### Docker
+### Development environment
 
-This repo is configured to be built with Docker, and Docker compose. To build all apps in this repo:
+You can use Docker Compose to build and run the apps all at once, **in a development environment**.
 
-```
-# Install dependencies
-yarn install
+To run the Docker environment, just run:
 
-# Create a network, which allows containers to communicate
-# with each other, by using their container name as a hostname
-docker network create app_network
-
-# Build prod using new BuildKit engine
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose -f docker-compose.yml build
-
-# Start prod in detached mode
-docker-compose -f docker-compose.yml up -d
+```bash
+$ docker compose up -d --build
+# ...
 ```
 
-Open http://localhost:3000.
+### (Backend) Deploying manually
 
-To shutdown all running containers:
+To deploy the backend manually, follow the steps:
 
+1. Build a docker image
+
+To begin, you must build the Docker image located in the root directory. **Do not use the Dockerfile in the /apps/api directory unless you're using Docker Compose**.
+
+```bash
+# Build the api image with the production target
+$ docker build .
 ```
-# Stop running containers started by docker-compse
- docker-compose -f docker-compose.yml down
+
+2. Use the Docker image with a environment file
+
+You can use the environment file template provided in `apps/api/.env.local.default` by copying it to `.env.local` or `.env`
+
+```bash
+$ docker run <hash> -d --name api --env-file .env.local
+# Magic happens...
 ```
+
+### Production environment
+
+To get started in a development environment, you can use the "Deploy to Vercel" button for the frontend,
+and "Deploy to Railway" for the backend portion.
+
+#### Backend deployment
+
+When deploying the backend, it's best to use the Dockerfile provided **in this root directory** to build the backend.
+Then, you can use that image to spin up a production environment for the backend.
+
+You may also use the Dockerfile in the `/apps/api` directory if your deployment platform supports Turborepos.
 
 ### Remote Caching
 
