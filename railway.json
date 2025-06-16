@@ -3,10 +3,5 @@
     "watchPatterns": [
       "/apps/api/**/*"
     ]
-  },
-  "deploy": {
-    "preDeployCommand": [
-      "pnpm drizzle-kit push --config=drizzle.config.ts"
-    ]
   }
 }
