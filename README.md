@@ -4,6 +4,10 @@ This repo is a template for setting up a monorepo with a NextJS frontend, and Ex
 
 It includes basic authentication functionality and a boilerplate to get setup!
 
+Deploy the Backend with Railway: [![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/kZsoqI?referralCode=xNYNKB)
+
+Deploy the Frontend with Vercel: tbd
+
 This Turborepo includes the following:
 
 ### Apps and Packages
