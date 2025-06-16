@@ -8,7 +8,7 @@ import cors from "cors";
 
 // TRPC initializers and routers
 import { initalizeTRPCRouter, t } from "./lib/trpc";
-import { helloWorldRouter } from "./modules/hello-world/hello-world.router";
+import helloWorldRouter from "./modules/hello-world";
 
 export const rootRouter = t.router({
   app: t.router({
