@@ -6,7 +6,9 @@ dotenv.config({ path: ['.env.local'] });
 export const env = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
-    BETTER_AUTH_URL: z.string().url(),
+    BETTER_AUTH_URL: process.env.RAILWAY_PUBLIC_DOMAIN
+      ? z.string().url().optional()
+      : z.string().url(),
     BETTER_AUTH_SECRET: z.string(),
     CORS_ALLOWED_ORIGINS: z.string().optional().default('*'),
     PORT: z.string().optional(),
