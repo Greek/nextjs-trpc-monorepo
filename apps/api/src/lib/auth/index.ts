@@ -3,6 +3,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { db } from '../../db';
 import {
   ALLOWED_ORIGINS,
+  API_URL,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
 } from '../constants';
@@ -11,6 +12,7 @@ import * as schema from '../../db/schema';
 import { validateSignupHook } from './hooks';
 
 export const auth: ReturnType<typeof betterAuth> = betterAuth({
+  baseURL: API_URL,
   basePath: '/auth',
   trustedOrigins: ALLOWED_ORIGINS,
   database: drizzleAdapter(db, {
