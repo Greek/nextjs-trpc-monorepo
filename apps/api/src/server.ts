@@ -2,7 +2,6 @@ import { toNodeHandler } from 'better-auth/node';
 import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
 import express, { type Express } from 'express';
-import morgan from 'morgan';
 import { auth } from './lib/auth';
 import { ALLOWED_ORIGINS } from './lib/constants';
 
@@ -31,11 +30,6 @@ export const createServer = (): Express => {
   app.all('/auth/{*splat}', toNodeHandler(auth));
 
   app.disable('x-powered-by');
-  if (process.env.NODE_ENV == 'development') {
-    app.use(morgan('dev'));
-  } else {
-    app.use(morgan('tiny'));
-  }
 
   app.use(urlencoded({ extended: true }));
   app.use(json());
