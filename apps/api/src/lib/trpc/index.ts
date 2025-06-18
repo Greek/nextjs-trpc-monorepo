@@ -1,6 +1,6 @@
 import { initTRPC, TRPCError } from '@trpc/server';
-import { ZodError } from 'zod';
 import * as trpcExpress from '@trpc/server/adapters/express';
+import { ZodError } from 'zod';
 
 import { auth } from '../auth';
 

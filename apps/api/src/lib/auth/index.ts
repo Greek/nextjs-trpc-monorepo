@@ -1,14 +1,14 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { createAuthMiddleware } from 'better-auth/api';
 import { db } from '../../db';
+import * as schema from '../../db/schema';
 import {
   ALLOWED_ORIGINS,
   API_URL,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
 } from '../constants';
-import { createAuthMiddleware } from 'better-auth/api';
-import * as schema from '../../db/schema';
 import { validateSignupHook } from './hooks';
 
 export const auth: ReturnType<typeof betterAuth> = betterAuth({
