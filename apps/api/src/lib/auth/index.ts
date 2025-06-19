@@ -10,6 +10,7 @@ import {
   MIN_PASSWORD_LENGTH,
 } from '../constants';
 import { logger } from '../logger';
+import { redactEmail } from '../redactor';
 import { validateSignupHook } from './hooks';
 
 export const auth: ReturnType<typeof betterAuth> = betterAuth({
@@ -18,7 +19,8 @@ export const auth: ReturnType<typeof betterAuth> = betterAuth({
   trustedOrigins: ALLOWED_ORIGINS,
   logger: {
     level: process.env.NODE_ENV === 'development' ? 'debug' : 'warn',
-    log: (level, message, args) => logger.log(level, message, args),
+    log: (level, message, args) =>
+      logger.log(level, redactEmail(message), args),
   },
   database: drizzleAdapter(db, {
     provider: 'pg',
