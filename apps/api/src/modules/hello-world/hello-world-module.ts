@@ -2,6 +2,7 @@ import { auth } from '@/lib/auth';
 import { Logger } from '@/lib/logger';
 import { inferProcedureBuilderResolverOptions } from '@trpc/server';
 import type { Request } from 'express';
+import httpContext from 'express-http-context';
 import { protectedProcedure } from '../../lib/trpc';
 export class HelloWorldModule {
   constructor() {}
@@ -18,7 +19,10 @@ export class HelloWorldModule {
       headers: Object.assign(req.headers),
     });
 
-    Logger.getInstance().info(freshSesh);
+    Logger.getInstance().info(
+      `Logged session ${httpContext.get('rid')}`,
+      freshSesh,
+    );
 
     if (!opts.ctx.session) {
       return `Hello ${opts.input}! What's up?`;
