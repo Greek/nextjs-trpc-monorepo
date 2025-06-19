@@ -1,4 +1,5 @@
 import { auth } from '@/lib/auth';
+import { logger } from '@/lib/logger';
 import { inferProcedureBuilderResolverOptions } from '@trpc/server';
 import winston from 'winston';
 import { protectedProcedure } from '../../lib/trpc';
