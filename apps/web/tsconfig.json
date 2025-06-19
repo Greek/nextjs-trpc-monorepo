@@ -2,9 +2,16 @@
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
     "strict": true,
-    "plugins": [{ "name": "next" }],
-    "baseUrl": "../",
-    "paths": { "@/*": ["./web/src/*"], "@api/*": ["./api/src/*"], "@repo/ui": ["../../packages/ui"] }
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*", "../api/src/*"],
+      "@api/*": ["../api/src/*"],
+      "@repo/ui": ["../../packages/ui"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -12,7 +19,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "postcss.config.mjs"
+    "postcss.config.mjs",
+    "../api/src/types"
   ],
   "exclude": ["node_modules"]
 }
