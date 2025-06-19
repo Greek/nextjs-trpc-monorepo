@@ -1,6 +1,5 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express';
-import { Request } from 'express';
 import { ZodError } from 'zod';
 
 import { auth } from '../auth';
@@ -22,7 +21,7 @@ const createContext = async ({
   });
 
   return {
-    req: Object.assign(req) as Request,
+    req: Object.assign(req),
     session: currSess?.session,
     user: currSess?.user,
   };
@@ -47,18 +46,16 @@ export const t = initTRPC.context<Context>().create({
 
 export const router = t.router;
 export const publicProcedure = t.procedure;
-export const protectedProcedure: typeof t.procedure = t.procedure.use(
-  (opts) => {
-    if (!opts.ctx.session) {
-      throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'You must be signed in to do this.',
-      });
-    }
+export const protectedProcedure = t.procedure.use((opts) => {
+  if (!opts.ctx.session) {
+    throw new TRPCError({
+      code: 'UNAUTHORIZED',
+      message: 'You must be signed in to do this.',
+    });
+  }
 
-    return opts.next({ ctx: opts.ctx, input: opts.input });
-  },
-);
+  return opts.next({ ctx: opts.ctx, input: opts.input });
+});
 /**
  * Returns a TRPC router for express.
  * @param router TRPC router
