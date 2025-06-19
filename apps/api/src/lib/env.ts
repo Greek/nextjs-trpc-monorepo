@@ -13,6 +13,13 @@ export const env = createEnv({
     BETTER_AUTH_SECRET: z.string(),
     CORS_ALLOWED_ORIGINS: z.string().optional().default('*'),
     PORT: z.string().optional(),
+    LOG_HEADERS: z
+      .string()
+      .regex(/^(true|false|1|0)$/, {
+        message: "Must be either 'true' or 'false",
+      })
+      .transform((val) => val === 'true' || val === '1')
+      .default('false'),
   },
 
   /**

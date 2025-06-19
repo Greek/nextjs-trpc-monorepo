@@ -5,6 +5,11 @@ const appendRequestId = winston.format.printf((info) => {
   if (httpContext.get('rid')) {
     info['requestId'] = httpContext.get('rid');
   }
+
+  if (httpContext.get('requestHeaders')) {
+    info['requestHeaders'] = httpContext.get('requestHeaders');
+  }
+
   return JSON.stringify(info);
 });
 
