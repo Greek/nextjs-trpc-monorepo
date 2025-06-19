@@ -44,6 +44,12 @@ importers:
       express:
         specifier: ^5.1.0
         version: 5.1.0
+      express-http-context:
+        specifier: ^2.0.1
+        version: 2.0.1
+      express-ruid:
+        specifier: ^1.1.5
+        version: 1.1.5
       ioredis:
         specifier: ^5.6.1
         version: 5.6.1
@@ -1901,6 +1907,9 @@ packages:
   '@types/body-parser@1.19.5':
     resolution: {integrity: sha512-fB3Zu92ucau0iQ0JMCFQE7b/dv8Ot07NI3KaZIkIUNXq82k4eBAqUaneXfleGY9JWskeS9y+u0nXMyspcuQrCg==}
 
+  '@types/cls-hooked@4.3.9':
+    resolution: {integrity: sha512-CMtHMz6Q/dkfcHarq9nioXH8BDPP+v5xvd+N90lBQ2bdmu06UvnLDqxTKoOJzz4SzIwb/x9i4UXGAAcnUDuIvg==}
+
   '@types/connect@3.4.38':
     resolution: {integrity: sha512-K6uROf1LD88uDQqJCktA4yzL1YYAK6NgfsI0v/mTgyPKWsX1CnJ0XPSDhViejru1GcRkLWb8RlzFYJRqGUbaug==}
 
@@ -2366,6 +2375,10 @@ packages:
     resolution: {integrity: sha512-hsU18Ae8CDTR6Kgu9DYf0EbCr/a5iGL0rytQDobUcdpYOKokk8LEjVphnXkDkgpi0wYVsqrXuP0bZxJaTqdgoA==}
     engines: {node: '>= 0.4'}
 
+  async-hook-jl@1.7.6:
+    resolution: {integrity: sha512-gFaHkFfSxTjvoxDMYqDuGHlcRyUuamF8s+ZTtJdDzqjws4mCt7v0vuV79/E2Wr2/riMQgtG4/yUtXWs1gZ7JMg==}
+    engines: {node: ^4.7 || >=6.9 || >=7.3}
+
   async@3.2.6:
     resolution: {integrity: sha512-htCUDlxyyCLMgaM3xXg0C0LW2xqfuQ6p05pCEIsXuyQ+a1koYKTuBMzRNwmybfLgvJDMd0r1LTn4+E0Ti6C2AA==}
 
@@ -2549,6 +2562,10 @@ packages:
   cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
+
+  cls-hooked@4.2.2:
+    resolution: {integrity: sha512-J4Xj5f5wq/4jAvcdgoGsL3G103BtWpZrMo8NEinRltN+xpTZdI+M38pyQqhuFU/P792xkMFvnKSf+Lm81U1bxw==}
+    engines: {node: ^4.7 || >=6.9 || >=7.3 || >=8.2.1}
 
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
@@ -2890,6 +2907,9 @@ packages:
   electron-to-chromium@1.5.151:
     resolution: {integrity: sha512-Rl6uugut2l9sLojjS4H4SAr3A4IgACMLgpuEMPYCVcKydzfyPrn5absNRju38IhQOf/NwjJY8OGWjlteqYeBCA==}
 
+  emitter-listener@1.1.2:
+    resolution: {integrity: sha512-Bt1sBAGFHY9DKY+4/2cV6izcKJUf5T7/gkdmkxzX/qv9CcGH8xSwVRW5mtX03SWJtRTWSOpzCuWN9rBFYZepZQ==}
+
   emittery@0.13.1:
     resolution: {integrity: sha512-DeWwawk6r5yR9jFgnDKYt4sLS0LmHJJi3ZOnb5/JdbYwj3nW+FxQnHIjhBKz8YLC7oRNPVM9NQ47I3CVx34eqQ==}
     engines: {node: '>=12'}
@@ -3187,6 +3207,17 @@ packages:
   expect@29.7.0:
     resolution: {integrity: sha512-2Zks0hf1VLFYI1kbh0I5jP3KHHyCHpkfyHBzsSXRFgl/Bg9mWYfMW8oD+PdMPlEwy5HNsR9JutYy6pMeOh61nw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+
+  express-http-context@1.2.5:
+    resolution: {integrity: sha512-3wH4zvH7hkD/b0EJfAM7fafMzPqr7tKqWaVXJrEt6GH+U1a0WykIjoFY3pJbAke9Z78q6znz1Cpgm+Q5VsQsmw==}
+    engines: {node: '>=8.0.0 <10.0.0 || >=10.4.0'}
+
+  express-http-context@2.0.1:
+    resolution: {integrity: sha512-2auIt7lQfhd/s+JAPwI87GOlPnbx9FdA5w45DH89tFQTQ4tzTFqqJAOKAMFwEUh8JRk3LglDUAL9tOe8el2+Sw==}
+    engines: {node: '>=14.8.0'}
+
+  express-ruid@1.1.5:
+    resolution: {integrity: sha512-c9NVdPsvxuFcJBi0F2Ybn2sGXpEz0f5nq8JyA4ir8MA+C0krWg9YJYMEjKIa8H13Bn3vujrZTAKplI+xm/exHw==}
 
   express@5.1.0:
     resolution: {integrity: sha512-DT9ck5YIRU+8GYzzU5kT3eHGA5iL+1Zd0EutOmTE9Dtk+Tvuzd23VBU+ec7HPNSTxXYO55gPV/hq4pSBJDjFpA==}
@@ -4740,6 +4771,9 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
+  shimmer@1.2.1:
+    resolution: {integrity: sha512-sQTKC1Re/rM6XyFM6fIAGHRPVGvyXfgzIDvzoq608vM+jeyVD0Tu1E6Np0Kc2zAIFWIj963V2800iF/9LPieQw==}
+
   side-channel-list@1.0.0:
     resolution: {integrity: sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==}
     engines: {node: '>= 0.4'}
@@ -4819,6 +4853,9 @@ packages:
 
   stable-hash@0.0.5:
     resolution: {integrity: sha512-+L3ccpzibovGXFK+Ap/f8LOS0ahMrHTf3xu7mMLSpEGU0EO9ucaysSylKo9eRDFNhWve/y275iPmIZ4z39a9iA==}
+
+  stack-chain@1.3.7:
+    resolution: {integrity: sha512-D8cWtWVdIe/jBA7v5p5Hwl5yOSOrmZPWDPe2KxQ5UAGD+nxbxU0lKXA4h85Ta6+qgdKVL3vUxsbIZjc1kBG7ug==}
 
   stack-trace@0.0.10:
     resolution: {integrity: sha512-KGzahc7puUKkzyMt+IqAep+TVNbKP+k2Lmwhub39m1AsTSkaDutx56aDCo+HLDzf/D26BIHTJWNiTG1KAJiQCg==}
@@ -6919,6 +6956,10 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/node': 20.17.47
 
+  '@types/cls-hooked@4.3.9':
+    dependencies:
+      '@types/node': 20.17.47
+
   '@types/connect@3.4.38':
     dependencies:
       '@types/node': 20.17.47
@@ -7469,6 +7510,10 @@ snapshots:
 
   async-function@1.0.0: {}
 
+  async-hook-jl@1.7.6:
+    dependencies:
+      stack-chain: 1.3.7
+
   async@3.2.6: {}
 
   asynckit@0.4.0: {}
@@ -7725,6 +7770,12 @@ snapshots:
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
 
+  cls-hooked@4.2.2:
+    dependencies:
+      async-hook-jl: 1.7.6
+      emitter-listener: 1.1.2
+      semver: 5.7.2
+
   clsx@2.1.1: {}
 
   cluster-key-slot@1.1.2: {}
@@ -7947,6 +7998,10 @@ snapshots:
       jake: 10.9.2
 
   electron-to-chromium@1.5.151: {}
+
+  emitter-listener@1.1.2:
+    dependencies:
+      shimmer: 1.2.1
 
   emittery@0.13.1: {}
 
@@ -8454,6 +8509,18 @@ snapshots:
       jest-matcher-utils: 29.7.0
       jest-message-util: 29.7.0
       jest-util: 29.7.0
+
+  express-http-context@1.2.5:
+    dependencies:
+      '@types/cls-hooked': 4.3.9
+      '@types/express': 4.17.22
+      cls-hooked: 4.2.2
+
+  express-http-context@2.0.1: {}
+
+  express-ruid@1.1.5:
+    dependencies:
+      express-http-context: 1.2.5
 
   express@5.1.0:
     dependencies:
@@ -10160,6 +10227,8 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
+  shimmer@1.2.1: {}
+
   side-channel-list@1.0.0:
     dependencies:
       es-errors: 1.3.0
@@ -10249,6 +10318,8 @@ snapshots:
   sprintf-js@1.0.3: {}
 
   stable-hash@0.0.5: {}
+
+  stack-chain@1.3.7: {}
 
   stack-trace@0.0.10: {}
 

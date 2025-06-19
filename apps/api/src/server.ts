@@ -5,7 +5,11 @@ import express, { type Express } from 'express';
 import { auth } from './lib/auth';
 import { ALLOWED_ORIGINS } from './lib/constants';
 
+import httpContext from 'express-http-context';
+import ruid from 'express-ruid';
+
 // TRPC initializers and routers
+import { requestIdMiddleware } from './lib/middleware/request-id';
 import { initalizeTRPCRouter, t } from './lib/trpc';
 import helloWorldRouter from './modules/hello-world';
 
@@ -25,6 +29,9 @@ export const createServer = (): Express => {
       credentials: true,
     }),
   );
+  app.use(httpContext.middleware);
+  app.use(ruid({ setInContext: true, setHeader: false }));
+  app.use(requestIdMiddleware);
 
   // Authentication handler.
   app.all('/auth/{*splat}', toNodeHandler(auth));
@@ -33,7 +40,10 @@ export const createServer = (): Express => {
 
   app.use(urlencoded({ extended: true }));
   app.use(json());
-  app.get('/status', (_, res) => res.status(200).json({ ok: true }));
+  app.get('/status', (req, res) => {
+    res.status(200).json({ ok: true });
+  });
+
   app.use('/internal', initalizeTRPCRouter(rootRouter));
 
   return app;

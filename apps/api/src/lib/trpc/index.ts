@@ -1,5 +1,6 @@
 import { initTRPC, TRPCError } from '@trpc/server';
 import * as trpcExpress from '@trpc/server/adapters/express';
+import { Request } from 'express';
 import { ZodError } from 'zod';
 
 import { auth } from '../auth';
@@ -33,6 +34,7 @@ const createContext = async ({
   });
 
   return {
+    req: Object.assign(req) as Request,
     session: currSess?.session,
     user: currSess?.user,
   };
