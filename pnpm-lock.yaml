@@ -45,8 +45,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       express-http-context:
-        specifier: ^2.0.1
-        version: 2.0.1
+        specifier: 1.2.4
+        version: 1.2.4
       express-ruid:
         specifier: ^1.1.5
         version: 1.1.5
@@ -3208,13 +3208,9 @@ packages:
     resolution: {integrity: sha512-2Zks0hf1VLFYI1kbh0I5jP3KHHyCHpkfyHBzsSXRFgl/Bg9mWYfMW8oD+PdMPlEwy5HNsR9JutYy6pMeOh61nw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
-  express-http-context@1.2.5:
-    resolution: {integrity: sha512-3wH4zvH7hkD/b0EJfAM7fafMzPqr7tKqWaVXJrEt6GH+U1a0WykIjoFY3pJbAke9Z78q6znz1Cpgm+Q5VsQsmw==}
+  express-http-context@1.2.4:
+    resolution: {integrity: sha512-jPpBbF1MWWdRcUU1rxsX0CPnA8ueEj8xgWvpRGHoXWGI4l5KqhPY4Bq+Gt6s2IhqHQQ0g0wIvJ3jFfbUuJJycQ==}
     engines: {node: '>=8.0.0 <10.0.0 || >=10.4.0'}
-
-  express-http-context@2.0.1:
-    resolution: {integrity: sha512-2auIt7lQfhd/s+JAPwI87GOlPnbx9FdA5w45DH89tFQTQ4tzTFqqJAOKAMFwEUh8JRk3LglDUAL9tOe8el2+Sw==}
-    engines: {node: '>=14.8.0'}
 
   express-ruid@1.1.5:
     resolution: {integrity: sha512-c9NVdPsvxuFcJBi0F2Ybn2sGXpEz0f5nq8JyA4ir8MA+C0krWg9YJYMEjKIa8H13Bn3vujrZTAKplI+xm/exHw==}
@@ -8510,17 +8506,15 @@ snapshots:
       jest-message-util: 29.7.0
       jest-util: 29.7.0
 
-  express-http-context@1.2.5:
+  express-http-context@1.2.4:
     dependencies:
       '@types/cls-hooked': 4.3.9
       '@types/express': 4.17.22
       cls-hooked: 4.2.2
 
-  express-http-context@2.0.1: {}
-
   express-ruid@1.1.5:
     dependencies:
-      express-http-context: 1.2.5
+      express-http-context: 1.2.4
 
   express@5.1.0:
     dependencies:
