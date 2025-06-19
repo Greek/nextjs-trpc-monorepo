@@ -17,20 +17,8 @@ const createContext = async ({
   req,
   res,
 }: trpcExpress.CreateExpressContextOptions) => {
-  const headers = Object.entries(req.headers).reduce<Record<string, string>>(
-    (acc, [key, value]) => {
-      if (typeof value === 'string') {
-        acc[key] = value;
-      } else if (Array.isArray(value)) {
-        acc[key] = value.join(', ');
-      }
-      return acc;
-    },
-    {},
-  );
-
   const currSess = await auth.api.getSession({
-    headers: new Headers(headers),
+    headers: new Headers(Object.assign(req.headers)),
   });
 
   return {
@@ -59,17 +47,18 @@ export const t = initTRPC.context<Context>().create({
 
 export const router = t.router;
 export const publicProcedure = t.procedure;
-export const protectedProcedure = t.procedure.use((opts) => {
-  if (!opts.ctx.session) {
-    throw new TRPCError({
-      code: 'UNAUTHORIZED',
-      message: 'You must be signed in to do this.',
-    });
-  }
+export const protectedProcedure: typeof t.procedure = t.procedure.use(
+  (opts) => {
+    if (!opts.ctx.session) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'You must be signed in to do this.',
+      });
+    }
 
-  return opts.next({ ctx: opts.ctx, input: opts.input });
-});
-
+    return opts.next({ ctx: opts.ctx, input: opts.input });
+  },
+);
 /**
  * Returns a TRPC router for express.
  * @param router TRPC router
