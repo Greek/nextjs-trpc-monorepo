@@ -21,7 +21,7 @@ export const rootRouter = t.router({
 });
 
 export const createServer = (): Express => {
-  env.REDIS_URL?.length && checkForRedisConnection();
+  checkForRedisConnection();
 
   const app = express();
 

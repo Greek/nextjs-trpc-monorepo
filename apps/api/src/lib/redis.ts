@@ -1,9 +1,19 @@
 import { Redis } from 'ioredis';
 import { env } from './env';
+import { logger } from './logger';
 
-export const redis = new Redis(env.REDIS_URL!);
+export const redis: Redis = new Redis(env.REDIS_URL!).on('error', (err) => {
+  if (!env.REDIS_URL) {
+    logger.warn('Redis URL not defined, aborting connection.');
+    redis.disconnect();
+  }
+});
+
 export async function checkForRedisConnection() {
-  let ok: boolean = false;
+  if (redis.status !== 'ready') {
+    return;
+  }
+
   try {
     await redis.set('healthcheck', 1);
     await redis.get('healthcheck');
