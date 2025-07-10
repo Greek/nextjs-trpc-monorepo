@@ -21,7 +21,7 @@ const createContext = async ({
   });
 
   return {
-    req: Object.assign(req),
+    req: Object.assign(req) as Request,
     session: currSess?.session,
     user: currSess?.user,
   };

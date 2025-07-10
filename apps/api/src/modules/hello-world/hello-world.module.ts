@@ -1,9 +1,8 @@
 import { auth } from '@/lib/auth';
 import { logger } from '@/lib/logger';
-import { inferProcedureBuilderResolverOptions } from '@trpc/server';
-import type { Request } from 'express';
 import httpContext from 'express-http-context';
-import { protectedProcedure } from '../../lib/trpc';
+import { GetNameProcedure } from './hello-world.types';
+
 export class HelloWorldModule {
   constructor() {}
 
@@ -11,10 +10,8 @@ export class HelloWorldModule {
     return new HelloWorldModule();
   }
 
-  public async getName(
-    opts: inferProcedureBuilderResolverOptions<typeof protectedProcedure>,
-  ) {
-    const req = opts.ctx.req as Request;
+  public async getName(opts: GetNameProcedure) {
+    const req = opts.ctx.req;
     const freshSesh = await auth.api.getSession({
       headers: Object.assign(req.headers),
     });
@@ -27,6 +24,6 @@ export class HelloWorldModule {
       return `Hello ${opts.input}! What's up?`;
     }
 
-    return `Hello ${opts.input}! What's up ${opts.ctx.user?.name}?\n\nYour request ID is ${opts.ctx.req.rid}`;
+    return `Hello ${opts.input}! What's up ${opts.ctx.user?.name}?\n\nYour request ID is ${httpContext.get('rid')}`;
   }
 }
