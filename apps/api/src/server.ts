@@ -1,18 +1,18 @@
+import { auth } from '@api/lib/auth';
+import { ALLOWED_ORIGINS } from '@api/lib/constants';
 import { toNodeHandler } from 'better-auth/node';
 import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
 import express, { type Express } from 'express';
-import { auth } from './lib/auth';
-import { ALLOWED_ORIGINS } from './lib/constants';
 
 import httpContext from 'express-http-context';
 import ruid from 'express-ruid';
 
-import { env } from './lib/env';
-import { requestHeadersMiddleware } from './lib/middleware/request-headers';
-import { checkForRedisConnection } from './lib/redis';
-import { initalizeTRPCRouter, t } from './lib/trpc';
-import helloWorldRouter from './modules/hello-world';
+import { env } from '@api/lib/env';
+import { requestHeadersMiddleware } from '@api/lib/middleware/request-headers';
+import { checkForRedisConnection } from '@api/lib/redis';
+import { initalizeTRPCRouter, t } from '@api/lib/trpc';
+import helloWorldRouter from '@api/modules/hello-world';
 
 export const rootRouter = t.router({
   app: t.router({

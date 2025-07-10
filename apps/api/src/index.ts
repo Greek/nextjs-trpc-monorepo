@@ -1,6 +1,6 @@
-import { env } from './lib/env';
-import { logger } from './lib/logger';
-import { createServer } from './server';
+import { env } from '@api/lib/env';
+import { logger } from '@api/lib/logger';
+import { createServer } from '@api/server';
 
 const port = env.PORT || 3000;
 const server = createServer();
