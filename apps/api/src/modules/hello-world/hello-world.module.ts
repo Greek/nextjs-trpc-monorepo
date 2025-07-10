@@ -1,5 +1,5 @@
-import { auth } from '@/lib/auth';
-import { logger } from '@/lib/logger';
+import { auth } from '@api/lib/auth';
+import { logger } from '@api/lib/logger';
 import httpContext from 'express-http-context';
 import { GetNameProcedure } from './hello-world.types';
 

@@ -8,7 +8,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*", "../api/src/*"],
+      "@/*": ["./src/*"],
       "@api/*": ["../api/src/*"],
       "@repo/ui": ["../../packages/ui"]
     }
@@ -22,5 +22,5 @@
     "postcss.config.mjs",
     "../api/src/types"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "../api"]
 }
